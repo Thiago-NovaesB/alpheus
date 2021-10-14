@@ -39,8 +39,8 @@ MOI.set(model, MOI.RawParameter("max_iter"), 5000)
 @NLconstraint(model,[j in 1:J], W[j] <= V[j]^(3/2));
 @constraint(model, z[1] == 0);
 @constraint(model, z[J] == 0);
+# @constraint(model, H[J] == 2);
 @constraint(model,[j in 1:J], A[j] == B*H[j]);
-@NLconstraint(model,[j in 1:J], V[j]*A[j]^2 == Q^2);
 @NLexpression(model, R[j in 1:J], A[j]/(B+2*H[j]));
 @constraint(model, [j in 1:J], V[j] <= g*H[j]);
 @NLexpression(model, S[j in 1:J], V[j]*(n0^2+nt^2*z[j]+2*n0*nt*z[j])/(R[j]^(4/3)));
@@ -49,7 +49,7 @@ MOI.set(model, MOI.RawParameter("max_iter"), 5000)
 @constraint(model, [j in 1:J-1], -M[j]*H[j] <= H[j+1] - H[j]);
 @constraint(model, [j in 1:J-1], H[j+1] - H[j] <= M[j]*H[j]);
 
-@NLobjective(model, Max, -H[1]*ηu + H[J]*ηd + sum(W[j]*z[j] for j in 1:J) )# - sum((V[j]*A[j]^2 - Q^2)^2 for j in 1:J)/J)
+@NLobjective(model, Max, -H[1]*ηu + H[J]*ηd + sum(W[j]*z[j] for j in 1:J) - sum((V[j]*A[j]^2 - Q^2)^2 for j in 1:J)/J)
 
 @time status = optimize!(model)
 
