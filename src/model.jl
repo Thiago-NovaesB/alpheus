@@ -48,11 +48,11 @@ function singleModel!(data::alpheusData)
     @constraint(model, [j in 1:J-1], H[j+1] - H[j] <= input.M*H[j]);
     @constraint(model, [j in 1:J], V[j] <= g*H[j]);
     @NLconstraint(model,[j in 1:J], V[j]*A[j]^2 == input.Q^2);
-    @NLconstraint(model, [j in 1:J-1], V[j]/(2*g) + H[j] + preprocessor.E[j] == V[j+1]/(2*g) + H[j+1] + preprocessor.E[j+1] + SM[j]*preprocessor.Δx + W[j]*z[j]);
+    @NLconstraint(model, [j in 1:J-1], V[j]/(2*g) + H[j] + preprocessor.E[j] == V[j+1]/(2*g) + H[j+1] + preprocessor.E[j+1] + SM[j]*preprocessor.Δx + W[j]);
 
     ### create objective ###
 
-    @NLobjective(model, Max,sum(W[j]*z[j] for j in 1:J) -(input.Hu-H[1])*input.ηu*options.upstream + (H[J]-input.Hd)*input.ηd*options.downstream)
+    @NLobjective(model, Max,sum(W[j] for j in 1:J) -(input.Hu-H[1])*input.ηu*options.upstream + (H[J]-input.Hd)*input.ηd*options.downstream)
     
     optimizeModel!(model)
     fillOutput!(model,data)
@@ -72,6 +72,7 @@ function fillOutput!(model::Model,data::alpheusData)
     output.z = value.(model[:z]);
     V = value.(model[:V]);
     output.U = sqrt.(V)
+
     nothing
 end
 

@@ -11,6 +11,7 @@ include("utils.jl")
 include("input.jl")
 include("model.jl")
 include("enumeration.jl")
+include("output.jl")
 
 const g = 9.81
 const deepest = 200.0
