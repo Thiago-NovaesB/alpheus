@@ -9,7 +9,7 @@ function grapfOutput!(data::alpheusData)
     z = data.output.z
 
 
-    plot(x, H ,title="Altura",xlabel="X", ylabel="H", label="Altura(m)")
+    plot(x, H ,title="Altura",xlabel="X", ylabel="H", label="Altura(m)",legend=:topleft)
     scatter!(x[z.==1.0], H[z.==1.0], color = "green", label = "Turbina")
     savefig("altura_$(solver)_$(upstream)_$(dowstream)_$(J).png")
 
@@ -28,7 +28,7 @@ function grapfOutputEnum!(data::alpheusData)
     dowstream = data.options.downstream
     solver = data.options.solver
 
-    plot(x, W ,title="Energia",xlabel="X", ylabel="W", label="Energia(m)")
+    plot(x, W ,title="Energia",xlabel="X", ylabel="W", label="Energia(m)",legend=:topleft)
     savefig("energiaEnum_$(solver)_$(upstream)_$(dowstream)_$(J).png")
 
     nothing
