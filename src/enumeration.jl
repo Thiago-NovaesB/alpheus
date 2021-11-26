@@ -29,7 +29,7 @@ function explicityEnumeration!(data::alpheusData)
         @variable(model, 0.0 <= V[1:J] <= g*deepest, start = 1.0);
 
         ### create expressions ###
-        @NLexpression(model, W[j in 1:J], z[j]*5*(V[j]/2.8)^(3/2)/8);
+        @NLexpression(model, W[j in 1:J], z[j]*input.N_turbine*(V[j]/input.Vmax^2)^(3/2)*preprocessor.K);
         @NLexpression(model, A[j in 1:J], input.B*H[j]);
         @NLexpression(model, R[j in 1:J], A[j]/(input.B+2*H[j]));
         @NLexpression(model, S[j in 1:J], V[j]*(input.n0^2+input.nt^2*z[j]+2*input.n0*input.nt*z[j])/(R[j]^(4/3)));

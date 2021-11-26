@@ -13,5 +13,6 @@ include("model.jl")
 include("enumeration.jl")
 include("output.jl")
 
+const density = 1000
 const g = 9.81
 const deepest = 200.0

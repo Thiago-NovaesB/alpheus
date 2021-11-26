@@ -158,6 +158,8 @@ end
     Hd::Float64
     Vmin::Float64
     Vmax::Float64
+    N_turbine::Int
+    Pmax::Float64
 end
 
 @kwdef mutable struct alpheusPreprocessor
@@ -165,6 +167,7 @@ end
     Δx::Float64
     x::Array{Float64,1}
     E::Array{Float64,1}
+    K::Float64
 end
 
 @kwdef mutable struct alpheusOutput

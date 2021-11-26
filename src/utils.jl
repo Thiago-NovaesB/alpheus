@@ -29,6 +29,8 @@ function fillInput!(data::alpheusData)
     input.Hd = Hd
     input.Vmin = Vmin
     input.Vmax = Vmax
+    input.N_turbine = N_turbine
+    input.Pmax = Pmax
 
     nothing
 end
@@ -41,6 +43,7 @@ function fillPreprocessor!(data::alpheusData)
     preprocessor.Δx = input.L/(input.J-1);
     preprocessor.x = LinRange(0,input.L,input.J);
     preprocessor.E = (input.L.-preprocessor.x)*preprocessor.I;
+    preprocessor.K = input.Pmax / input.Q / g /density
 
     nothing
 end
