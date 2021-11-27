@@ -12,4 +12,5 @@ if data.options.enumerate
 else
     singleModel!(data)
     grapfOutput!(data)
+    textOutput!(data)
 end

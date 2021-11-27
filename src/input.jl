@@ -1,7 +1,7 @@
-J = 100
+J = 400
 B = 10.0
 θ = 0.0024
-M = 0.01
+M = 0.0025
 Gt = 2.0
 L = 1000.0
 n0 = 0.033
@@ -9,7 +9,7 @@ nt = 0.0133
 Q = 30
 ηu = 0.9
 ηd = 0.95
-f = 2
+f = 1
 Hu = 3
 Hd = 3
 Vmin = 1.0
@@ -19,6 +19,6 @@ Pmax = 5000
 
 upstream = false
 downstream = false
-enumerate = false
+enumerate = true
 solver = bonmin
 parameters = Dict()

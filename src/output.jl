@@ -20,6 +20,25 @@ function grapfOutput!(data::alpheusData)
     nothing
 end
 
+function textOutput!(data::alpheusData)
+    x = data.preprocessor.x
+    H = data.output.H
+    U = data.output.U
+    W = data.output.W
+    J = data.input.J
+    upstream = data.options.upstream
+    dowstream = data.options.downstream
+    solver = data.options.solver
+    z = data.output.z
+
+    open("output_$(J)","w") do file
+        write(file, "$(J) $(data.preprocessor.x'z) $(H'z) $(U'z) $(W'z)")
+    end
+
+
+    nothing
+end
+
 function grapfOutputEnum!(data::alpheusData)
     x = data.preprocessor.x
     W = data.output.W_enum
@@ -28,7 +47,9 @@ function grapfOutputEnum!(data::alpheusData)
     dowstream = data.options.downstream
     solver = data.options.solver
 
-    plot(x, W ,title="Energia",xlabel="X", ylabel="W", label="Energia(m)",legend=:topleft)
+    W = W*g*density*data.input.Q
+
+    plot(x, W ,title="Potência",xlabel="X (m)", ylabel="Y (W)", label="Potência(W)",legend=:topright)
     savefig("energiaEnum_$(solver)_$(upstream)_$(dowstream)_$(J).png")
 
     nothing
