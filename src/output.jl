@@ -9,11 +9,11 @@ function grapfOutput!(data::alpheusData)
     z = data.output.z
 
 
-    plot(x, H ,title="Altura",xlabel="X", ylabel="H", label="Altura(m)",legend=:topleft)
+    plot(x, H ,title="Altura",xlabel="X (m)", ylabel="H (m)", label="Altura (m)",legend=:topleft)
     scatter!(x[z.==1.0], H[z.==1.0], color = "green", label = "Turbina")
     savefig("altura_$(solver)_$(upstream)_$(dowstream)_$(J).png")
 
-    plot(x, U ,title="Velocidade",xlabel="X", ylabel="U", label="Velocidade(m/s)")
+    plot(x, U ,title="Velocidade",xlabel="X (m) ", ylabel="U (m/s)", label="Velocidade (m/s)")
     scatter!(x[z.==1.0], U[z.==1.0], color = "green", label = "Turbina")
     savefig("velocidade_$(solver)_$(upstream)_$(dowstream)_$(J).png")
 

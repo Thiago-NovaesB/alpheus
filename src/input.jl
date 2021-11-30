@@ -9,7 +9,7 @@ nt = 0.0133
 Q = 30
 ηu = 0.9
 ηd = 0.95
-f = 1
+f = 2
 Hu = 3
 Hd = 3
 Vmin = 1.0
@@ -19,6 +19,6 @@ Pmax = 5000
 
 upstream = false
 downstream = false
-enumerate = true
+enumerate = false
 solver = bonmin
 parameters = Dict()
