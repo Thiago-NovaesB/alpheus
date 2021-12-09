@@ -43,7 +43,7 @@ function fillPreprocessor!(data::alpheusData)
     preprocessor.Δx = input.L/(input.J-1);
     preprocessor.x = LinRange(0,input.L,input.J);
     preprocessor.E = (input.L.-preprocessor.x)*preprocessor.I;
-    preprocessor.K = input.Pmax / input.Q / g /density
+    preprocessor.K = input.Pmax / input.Q / g /density / input.Vmax^3
 
     nothing
 end

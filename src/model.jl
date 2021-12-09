@@ -23,7 +23,7 @@ function singleModel!(data::alpheusData)
     @variable(model, z[1:J], Bin);
 
     ### create expressions ###
-    @NLexpression(model, W[j in 1:J], z[j]*input.N_turbine*(V[j]/input.Vmax^2)^(3/2)*preprocessor.K);
+    @NLexpression(model, W[j in 1:J], z[j]*input.N_turbine*(V[j])^(3/2)*preprocessor.K);
     @NLexpression(model, A[j in 1:J], input.B*H[j]);
     @NLexpression(model, R[j in 1:J], A[j]/(input.B+2*H[j]));
     @NLexpression(model, S[j in 1:J], V[j]*(input.n0^2+input.nt^2*z[j]+2*input.n0*input.nt*z[j])/(R[j]^(4/3)));
@@ -36,7 +36,7 @@ function singleModel!(data::alpheusData)
     if !options.downstream
         @constraint(model, H[J] >= input.Hd);
     end
-    @constraint(model, sum(z) <= input.f);
+    @constraint(model, sum(z) == input.f);
 
     @constraint(model, [j in 1:J], V[j] >= input.Vmin*z[j]);
     @constraint(model, [j in 1:J], V[j] <= (input.Vmax - g*deepest)*z[j] + g*deepest);
