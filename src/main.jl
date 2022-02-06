@@ -7,10 +7,10 @@ fillOptions!(data)
 fillPreprocessor!(data)
 
 if data.options.enumerate
-    explicityEnumeration!(data)
+    @time explicityEnumeration!(data)
     grapfOutputEnum!(data)
 else
-    singleModel!(data)
+    @time singleModel!(data)
     grapfOutput!(data)
     textOutput!(data)
 end
