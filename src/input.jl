@@ -17,8 +17,8 @@ Vmax = 2.8
 N_turbine = 5
 Pmax = 5000
 
-upstream = true
-downstream = true
+upstream = false
+downstream = false
 enumerate = false
 solver = bonmin
 parameters = Dict()
